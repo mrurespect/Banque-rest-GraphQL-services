@@ -1,7 +1,7 @@
 package fsts.mrurespect.ebankservicerest.service;
 
 
-import fsts.mrurespect.ebankservicerest.dto.AccountMapper;
+import fsts.mrurespect.ebankservicerest.mapper.AccountMapper;
 import fsts.mrurespect.ebankservicerest.dto.AccountRequestDto;
 import fsts.mrurespect.ebankservicerest.dto.AccountResponseDto;
 import fsts.mrurespect.ebankservicerest.entity.Account;

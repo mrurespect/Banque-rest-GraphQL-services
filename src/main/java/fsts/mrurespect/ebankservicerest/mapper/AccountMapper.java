@@ -1,5 +1,7 @@
-package fsts.mrurespect.ebankservicerest.dto;
+package fsts.mrurespect.ebankservicerest.mapper;
 
+import fsts.mrurespect.ebankservicerest.dto.AccountRequestDto;
+import fsts.mrurespect.ebankservicerest.dto.AccountResponseDto;
 import fsts.mrurespect.ebankservicerest.entity.Account;
 import org.springframework.stereotype.Component;
 
