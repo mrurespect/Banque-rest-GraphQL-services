@@ -1,13 +1,15 @@
 package fsts.mrurespect.ebankservicerest.web;
 
+import fsts.mrurespect.ebankservicerest.dto.AccountRequestDto;
+import fsts.mrurespect.ebankservicerest.dto.AccountResponseDto;
 import fsts.mrurespect.ebankservicerest.entity.Account;
-import fsts.mrurespect.ebankservicerest.repository.AccountRepository;
 import fsts.mrurespect.ebankservicerest.service.AccountService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class AccountRestController {
 
     private final AccountService accountService;
@@ -27,7 +29,7 @@ public class AccountRestController {
         return accountService.getAccountById(id);
     }
     @PostMapping("/accounts")
-    public Account addAccount(@RequestBody Account account) {
+    public AccountResponseDto addAccount(@RequestBody AccountRequestDto account) {
         return accountService.addAccount(account);
     }
 

@@ -1,14 +1,19 @@
 package fsts.mrurespect.ebankservicerest.service;
 
+
+import fsts.mrurespect.ebankservicerest.dto.AccountMapper;
+import fsts.mrurespect.ebankservicerest.dto.AccountRequestDto;
+import fsts.mrurespect.ebankservicerest.dto.AccountResponseDto;
 import fsts.mrurespect.ebankservicerest.entity.Account;
 import fsts.mrurespect.ebankservicerest.repository.AccountRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
 
 @Service
+@Transactional
 public class AccountServiceImp implements AccountService {
 
     private final AccountRepository accountRepository;
@@ -25,12 +30,10 @@ public class AccountServiceImp implements AccountService {
     }
 
     @Override
-    public Account addAccount(Account account) {
-        if (accountRepository.findById(account.getId()).isPresent())
-            throw new RuntimeException(String.format("Account %s already exists",account.getId()));
-
-        if (account.getId()==null || account.getId().isEmpty())account.setId(UUID.randomUUID().toString());
-        return accountRepository.save(account);
+    public AccountResponseDto addAccount(AccountRequestDto accountDto) {
+        Account account = AccountMapper.mapToEntity(accountDto);
+        Account savedAccount = accountRepository.save(account);
+          return AccountMapper.mapToDto(savedAccount);
     }
 
     @Override
