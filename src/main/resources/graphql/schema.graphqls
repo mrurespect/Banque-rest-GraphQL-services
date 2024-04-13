@@ -1,0 +1,12 @@
+type Query {    #on specie les requêtes possibles
+    accountList : [Account]
+}
+
+type Account {          #on declare le type Account
+    id: String! , #le ! signifie que le champ est obligatoire
+    createDate: String    # , is not required
+    currency: String
+    balance: Float
+    accountType: String
+}
+
