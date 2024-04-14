@@ -1,6 +1,7 @@
-type Query {    #on specie les requêtes possibles
+type Query {
     accountList : [Account]
     account(id: String!) : Account
+    customerList : [Customer]
 }
 
 type Account {
@@ -9,6 +10,12 @@ type Account {
     currency: String
     balance: Float
     accountType: String
+    customer: Customer
+}
+type Customer {
+    id: ID! ,
+    name:String
+    accounts: [Account]
 }
 type Mutation {
     addAccount(account:AccountDtoRequest): Account
