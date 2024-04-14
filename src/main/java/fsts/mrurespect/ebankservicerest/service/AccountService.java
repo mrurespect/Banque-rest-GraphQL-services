@@ -11,5 +11,5 @@ public interface AccountService {
     Account getAccountById(String id);
     AccountResponseDto addAccount(AccountRequestDto account);
     Account updateAccount(Account account);
-    void deleteAccount(String id);
+    boolean deleteAccount(String id);
 }

@@ -3,17 +3,26 @@ type Query {    #on specie les requêtes possibles
     account(id: String!) : Account
 }
 
-type Account {          # on declare le type Account
-    id: String! , #le ! signifie que le champ est obligatoire
-    createDate: String    # , is not required
+type Account {
+    id: String! ,
+    createDate: String
     currency: String
     balance: Float
     accountType: String
 }
 type Mutation {
     addAccount(account:AccountDtoRequest): Account
+    updateAccount(account:AccountRequest): Account
+    deleteAccount(id: String!): Boolean
 }
-input AccountDtoRequest {    #input pour les paramètres de la requête
+input AccountDtoRequest {
+    currency: String
+    balance: Float
+    accountType: String
+}
+input AccountRequest {
+    id: String! ,
+    createDate: String
     currency: String
     balance: Float
     accountType: String

@@ -44,7 +44,12 @@ public class AccountServiceImp implements AccountService {
     }
 
     @Override
-    public void deleteAccount(String id) {
-        accountRepository.deleteById(id);
+    public boolean deleteAccount(String id) {
+        try {
+            accountRepository.deleteById(id);
+        }catch (Exception e){
+            throw new RuntimeException(String.format("Account %s not found",id));
+        }
+        return true;
     }
 }

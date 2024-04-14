@@ -32,4 +32,12 @@ public class AccountGraphQlController {
     public AccountResponseDto addAccount(@Argument AccountRequestDto account){
         return accountService.addAccount(account);
     }
+    @MutationMapping
+    public Account updateAccount(@Argument Account account){
+        return accountService.updateAccount(account);
+    }
+    @MutationMapping
+    public boolean deleteAccount(@Argument String id){
+        return accountService.deleteAccount(id);
+    }
 }
