@@ -1,6 +1,7 @@
 package fsts.mrurespect.ebankservicerest.service;
 
 
+import fsts.mrurespect.ebankservicerest.exception.account.AccountNotFoundException;
 import fsts.mrurespect.ebankservicerest.mapper.AccountMapper;
 import fsts.mrurespect.ebankservicerest.dto.AccountRequestDto;
 import fsts.mrurespect.ebankservicerest.dto.AccountResponseDto;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -25,8 +27,8 @@ public class AccountServiceImp implements AccountService {
     public List<Account> getAllAccounts() {
         return accountRepository.findAll();
     }
-    public Account getAccountById(String id){
-        return accountRepository.findById(id).orElseThrow(()->new RuntimeException(String.format("Account %s not found",id)));
+    public Account getAccountById(String id) throws AccountNotFoundException {
+        return accountRepository.findById(id).orElseThrow(()-> new AccountNotFoundException(String.format("Account with ID  %s not found",id)));
     }
 
     @Override
@@ -37,18 +39,18 @@ public class AccountServiceImp implements AccountService {
     }
 
     @Override
-    public Account updateAccount(Account account) {
+    public Account updateAccount(Account account) throws AccountNotFoundException {
         if (accountRepository.findById(account.getId()).isEmpty())
-            throw new RuntimeException(String.format("Account %s not found",account.getId()));
+            throw new AccountNotFoundException(String.format("Account with ID  %s not found",account.getId()));
         return accountRepository.save(account);
     }
 
     @Override
-    public boolean deleteAccount(String id) {
+    public boolean deleteAccount(String id) throws AccountNotFoundException {
         try {
             accountRepository.deleteById(id);
         }catch (Exception e){
-            throw new RuntimeException(String.format("Account %s not found",id));
+            throw new AccountNotFoundException(String.format("Account with ID  %s not found",id));
         }
         return true;
     }

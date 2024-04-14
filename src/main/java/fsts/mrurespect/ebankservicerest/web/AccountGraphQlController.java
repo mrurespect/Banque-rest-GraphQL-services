@@ -2,8 +2,11 @@ package fsts.mrurespect.ebankservicerest.web;
 
 import fsts.mrurespect.ebankservicerest.dto.AccountRequestDto;
 import fsts.mrurespect.ebankservicerest.dto.AccountResponseDto;
+import fsts.mrurespect.ebankservicerest.dto.CustomerRequestDto;
 import fsts.mrurespect.ebankservicerest.entity.Account;
 import fsts.mrurespect.ebankservicerest.entity.Customer;
+import fsts.mrurespect.ebankservicerest.exception.account.AccountNotFoundException;
+import fsts.mrurespect.ebankservicerest.exception.customer.CustumerNotFoundException;
 import fsts.mrurespect.ebankservicerest.service.AccountService;
 import fsts.mrurespect.ebankservicerest.service.CustomerService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -28,7 +31,7 @@ public class AccountGraphQlController {
         return accountService.getAllAccounts();
     }
     @QueryMapping
-    public Account account(@Argument  String  id){
+    public Account account(@Argument  String  id) throws AccountNotFoundException {
         return accountService.getAccountById(id);
     }
 
@@ -37,11 +40,11 @@ public class AccountGraphQlController {
         return accountService.addAccount(account);
     }
     @MutationMapping
-    public Account updateAccount(@Argument Account account){
+    public Account updateAccount(@Argument Account account) throws AccountNotFoundException {
         return accountService.updateAccount(account);
     }
     @MutationMapping
-    public boolean deleteAccount(@Argument String id){
+    public boolean deleteAccount(@Argument String id) throws AccountNotFoundException {
         return accountService.deleteAccount(id);
     }
 
@@ -49,4 +52,21 @@ public class AccountGraphQlController {
     public List<Customer> customerList() {
         return customerService.getAllCustomers();
     }
+    @QueryMapping
+    public Customer customer(@Argument  Long  id) throws CustumerNotFoundException {
+        return customerService.getCustomerById(id);
+    }
+    @MutationMapping
+    public Customer addCustomer(@Argument CustomerRequestDto customer){
+        return customerService.addCustomer(customer);
+    }
+    @MutationMapping
+    public Customer updateCustomer(@Argument Customer customer) throws CustumerNotFoundException {
+        return customerService.updateCustomer(customer);
+    }
+    @MutationMapping
+    public boolean deleteCustomer(@Argument String id) throws CustumerNotFoundException {
+        return customerService.deleteCustomer(id);
+    }
+
 }
