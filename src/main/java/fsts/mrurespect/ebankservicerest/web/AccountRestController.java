@@ -44,6 +44,6 @@ public class AccountRestController {
     @DeleteMapping("/accounts/{id}")
     public ResponseEntity<String> deleteAccount(@PathVariable String id) throws AccountNotFoundException {
         accountService.deleteAccount(id);
-        return new ResponseEntity<>("account deleted successfully",HttpStatus.OK);
+        return new ResponseEntity<>("account deleted successfully", HttpStatus.OK);
     }
 }

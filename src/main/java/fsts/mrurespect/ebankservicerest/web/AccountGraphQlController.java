@@ -68,5 +68,14 @@ public class AccountGraphQlController {
     public boolean deleteCustomer(@Argument String id) throws CustumerNotFoundException {
         return customerService.deleteCustomer(id);
     }
-
+    @MutationMapping
+    public Customer addAccountToCustomer(@Argument Long customerId, @Argument String accountId) throws CustumerNotFoundException, AccountNotFoundException {
+        Customer customer = customerService.getCustomerById(customerId);
+        Account account = accountService.getAccountById(accountId);
+        account.setCustomer(customer);
+        customer.getAccounts().add(account);
+        customerService.updateCustomer(customer);
+        accountService.updateAccount(account);
+        return customer;
+    }
 }

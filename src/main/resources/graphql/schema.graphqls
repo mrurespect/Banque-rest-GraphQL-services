@@ -26,6 +26,7 @@ type Mutation {
     addCustomer(customer:CustomerDtoRequest): Customer
     updateCustomer(customer:CustomerRequest): Customer
     deleteCustomer(id: ID!): Boolean
+    addAccountToCustomer(customerId: String!, accountId: ID!): Customer
 }
 input AccountDtoRequest {
     currency: String
